@@ -22,11 +22,11 @@ public class SearchServiceImpl implements ISearchApiService {
 
     @Override
     public BusinessSearchPayload search(String url, String key) {
-        BusinessSearchPayload bid = iYelpApiService.invoke(HTTPS_API_YELP_COM_V_3_BUSINESSES + url, BusinessSearchPayload.class,defaultHeader(), HttpMethod.GET);
+        BusinessSearchPayload bid = iYelpApiService.invoke(HTTPS_API_YELP_COM_V_3_BUSINESSES + url, BusinessSearchPayload.class,defaultHeader(key), HttpMethod.GET);
 
         String reviewsUrl =  HTTPS_API_YELP_COM_V_3_BUSINESSES + bid.getBusinessId() + "/reviews";
 
-        BusinessSearchPayload reviews =  iYelpApiService.invoke(reviewsUrl, BusinessSearchPayload.class,defaultHeader(), HttpMethod.GET);
+        BusinessSearchPayload reviews =  iYelpApiService.invoke(reviewsUrl, BusinessSearchPayload.class,defaultHeader(key), HttpMethod.GET);
         reviews.setBusinessId(bid.getBusinessId());
         reviews.setName(bid.getName());
 
