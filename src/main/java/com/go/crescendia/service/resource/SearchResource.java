@@ -23,9 +23,11 @@ public class SearchResource {
             response = BusinessSearchPayload.class)
     @ResponseBody
     @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getReviews(@ApiParam(value = "Get customer item basket", required = true)
-                                                                                     @RequestParam ("url") String url) {
-       return new ResponseEntity<>(iSearchApiService.search(url), HttpStatus.ACCEPTED);
+    public ResponseEntity getReviews(@ApiParam(value = "Get bussiness info and reviews", required = true)
+                                                                                     @RequestParam ("url") String url,
+                                     @ApiParam(value = "Use your YELP API key", required = true)
+                                     @RequestParam ("key") String key) {
+       return new ResponseEntity<>(iSearchApiService.search(url,key), HttpStatus.ACCEPTED);
     }
 
 }

@@ -21,7 +21,7 @@ public class SearchServiceImpl implements ISearchApiService {
     public static final String HTTPS_VISION_GOOGLEAPIS_COM_V_1_IMAGES_ANNOTATE = "https://vision.googleapis.com/v1/images:annotate";
 
     @Override
-    public BusinessSearchPayload search(String url) {
+    public BusinessSearchPayload search(String url, String key) {
         BusinessSearchPayload bid = iYelpApiService.invoke(HTTPS_API_YELP_COM_V_3_BUSINESSES + url, BusinessSearchPayload.class,defaultHeader(), HttpMethod.GET);
 
         String reviewsUrl =  HTTPS_API_YELP_COM_V_3_BUSINESSES + bid.getBusinessId() + "/reviews";
@@ -36,9 +36,9 @@ public class SearchServiceImpl implements ISearchApiService {
 
        return reviews;
     }
-    private HttpHeaders defaultHeader() {
+    private HttpHeaders defaultHeader(String key) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer Xul-gffwAw1QpXts8NcexBYal9qDCXTUdixVhXIOAj79o9-OcCwY5GYeyi_jka7lkP5lOk-GkgKrj3ISSUtN42r1PIA2ZOaLsBpdVhVi0SnmXsYxmksN8PKbZeEKYHYx");
+        headers.add("Authorization", "Bearer "+key);
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
     }
